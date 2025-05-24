@@ -6,12 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Froggy and Bunny</title>
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-<style>
+  <style>
     body { font-family: 'Patrick Hand', cursive; background-color: #fff9f4; color: #4b4b4b; margin: 0; padding: 0; }
     header, section, footer { padding: 2rem; text-align: center; }
-    header { background: url('header-bg.jpg') no-repeat center center;background-size: cover;color: #4b4b4b;}
+    header {
+      background: url('header-bg.jpg') no-repeat center center;
+      background-size: cover;
+      color: #4b4b4b;
+    }
     h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .logo { max-width: 300px; border-radius: 90%; }
+    .logo { max-width: 150px; border-radius: 50%; }
     nav a { margin: 0 10px; text-decoration: none; color: #4b4b4b; }
     .gallery img { width: 150px; margin: 10px; border-radius: 10px; }
     .products, .gallery { display: flex; flex-wrap: wrap; justify-content: center; }
@@ -21,7 +25,7 @@
 </head>
 <body>
   <header>
-    <img src="Postcardfront.jpg" alt="Froggy and Bunny Logo" class="logo">
+    <img src="logo.png" alt="Froggy and Bunny Logo" class="logo">
     <h1>Froggy and Bunny</h1>
     <p>Enjoy the little moments of happiness</p>
     <nav>
@@ -50,13 +54,17 @@
   <section id="shop">
     <h2>Shop</h2>
     <p>Available via <a href="https://froggynbunny.etsy.com" target="_blank">Etsy</a> or DM on Instagram!</p>
-    <div class="products">
-      <div class="product-item">Sticker</div>
-      <div class="product-item">Magnet</div>
-      <div class="product-item">Tote Bag</div>
-      <div class="product-item">Notebook</div>
-      <div class="product-item">Phone Holder</div>
-    </div>
+    <div class="products" id="product-gallery"></div>
+    <script>
+      const gallery = document.getElementById("product-gallery");
+      for (let i = 1; i <= 49; i++) {
+        const img = document.createElement("img");
+        img.src = `product${i}.jpg`;
+        img.alt = `Product ${i}`;
+        img.className = "product-item";
+        gallery.appendChild(img);
+      }
+    </script>
   </section>
 
   <section id="contact">
