@@ -59,9 +59,9 @@
     <h2>Shop</h2>
     <p>Available via <a href="https://froggynbunny.etsy.com" target="_blank">Etsy</a> or DM on Instagram!</p>
     <div class="category-buttons">
-      <button onclick="showCategory('stickers')">Stickers</button>
-      <button onclick="showCategory('keyrings')">Keyrings</button>
-      <button onclick="showCategory('others')">Others</button>
+      <button data-category="stickers">Stickers</button>
+      <button data-category="keyrings">Keyrings</button>
+      <button data-category="others">Others</button>
     </div>
 
     <div class="product-category" id="stickers"><h3>Stickers</h3><div class="products" id="stickers-container"></div></div>
@@ -84,10 +84,21 @@
   <footer><p>&copy; 2025 Froggy and Bunny. All rights reserved.</p></footer>
 
   <script>
+    function showCategory(id) {
+      document.querySelectorAll('.product-category').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
     const captions = {
-      "stickers-container": ["Cute Froggy", "Carrot Bunny", "Joyful Duo", "Tea Time", ...],
-      "keyrings-container": ["Froggy Keyring", "Bunny Keyring", ...],
-      "others-container": ["Tote Bag", "Magnet", ...]
+      "stickers-container": [
+        "waterproof vinyl sticker, 6.5 x 6.5 cm", "Bunny with Carrot", "Joyful Duo", "Tea Time Froggy"
+      ],
+      "keyrings-container": [
+        "Froggy Keyring", "Bunny Keyring", "Froggy in Rain", "Heart Keyring", "Sparkling Duo", "Reading Keyring"
+      ],
+      "others-container": [
+        "My-plan mini magnet whiteboard", "Fridge magnet - cupit froggy", "Bottle holder", "Tote bag"
+      ]
     };
 
     const insertImages = (count, prefix, containerId) => {
@@ -95,31 +106,33 @@
       for (let i = 1; i <= count; i++) {
         const img = document.createElement("img");
         img.src = `${prefix}${i}.JPG`;
-        img.alt = captions[containerId][i - 1] || `${prefix} ${i}`;
+        img.alt = captions[containerId] ? captions[containerId][i - 1] || `${containerId} ${i}` : `${containerId} ${i}`;
         img.className = "product-item";
         img.onclick = () => showModal(img.src, img.alt);
         container.appendChild(img);
       }
     };
 
-    insertImages(20, "sticker", "stickers-container");
-    insertImages(15, "keyring", "keyrings-container");
-    insertImages(14, "other", "others-container");
-
-    function showCategory(id) {
-      document.querySelectorAll('.product-category').forEach(el => el.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+    insertImages(4, "sticker", "stickers-container");
+    insertImages(6, "keyring", "keyrings-container");
+    insertImages(4, "other", "others-container");
 
     function showModal(src, caption) {
-      document.getElementById("imageModal").style.display = "block";
-      document.getElementById("modalImage").src = src;
-      document.getElementById("modalCaption").textContent = caption;
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImage");
+      const modalCaption = document.getElementById("modalCaption");
+      modal.style.display = "block";
+      modalImg.src = src;
+      modalCaption.textContent = caption;
     }
 
     function closeModal() {
       document.getElementById("imageModal").style.display = "none";
     }
+
+    document.querySelectorAll('.category-buttons button').forEach(btn => {
+      btn.addEventListener('click', () => showCategory(btn.dataset.category));
+    });
   </script>
 </body>
 </html>
