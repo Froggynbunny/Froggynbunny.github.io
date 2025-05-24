@@ -20,6 +20,8 @@
     .gallery img { width: 150px; margin: 10px; border-radius: 10px; }
     .products, .gallery { display: flex; flex-wrap: wrap; justify-content: center; }
     .product-item { background: #fff; border: 1px solid #ccc; border-radius: 10px; margin: 10px; padding: 10px; width: 150px; }
+    .product-category { margin-bottom: 2rem; }
+    .product-category h3 { margin-top: 1rem; font-size: 1.5rem; color: #333; }
     footer { background: #ffe3e3; }
   </style>
 </head>
@@ -54,16 +56,41 @@
   <section id="shop">
     <h2>Shop</h2>
     <p>Available via <a href="https://froggynbunny.etsy.com" target="_blank">Etsy</a> or DM on Instagram!</p>
-    <div class="products" id="product-gallery"></div>
+
+    <div class="product-category">
+      <h3>Stickers</h3>
+      <div class="products" id="stickers"></div>
+    </div>
+
+    <div class="product-category">
+      <h3>Keyrings</h3>
+      <div class="products" id="keyrings"></div>
+    </div>
+
+    <div class="product-category">
+      <h3>Others</h3>
+      <div class="products" id="others"></div>
+    </div>
+
     <script>
-      const gallery = document.getElementById("product-gallery");
-      for (let i = 1; i <= 49; i++) {
-        const img = document.createElement("img");
-        img.src = `product${i}.jpg`;
-        img.alt = `Product ${i}`;
-        img.className = "product-item";
-        gallery.appendChild(img);
-      }
+      const stickerImages = 20;
+      const keyringImages = 15;
+      const otherImages = 14;
+
+      const insertImages = (count, prefix, containerId) => {
+        const container = document.getElementById(containerId);
+        for (let i = 1; i <= count; i++) {
+          const img = document.createElement("img");
+          img.src = `${prefix}${i}.jpg`;
+          img.alt = `${containerId} ${i}`;
+          img.className = "product-item";
+          container.appendChild(img);
+        }
+      };
+
+      insertImages(stickerImages, "sticker", "stickers");
+      insertImages(keyringImages, "keyring", "keyrings");
+      insertImages(otherImages, "other", "others");
     </script>
   </section>
 
@@ -78,3 +105,4 @@
   </footer>
 </body>
 </html>
+
