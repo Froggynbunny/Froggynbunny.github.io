@@ -17,7 +17,7 @@
     nav a { margin: 0 10px; text-decoration: none; color: #4b4b4b; cursor: pointer; }
     .gallery img { width: 150px; margin: 10px; border-radius: 10px; }
     .products, .gallery { display: flex; flex-wrap: wrap; justify-content: center; }
-    .product-item { background: #fff; border: 1px solid #ccc; border-radius: 10px; margin: 10px; padding: 10px; width: 150px; }
+    .product-item { background: #fff; border: 1px solid #ccc; border-radius: 10px; margin: 10px; padding: 10px; width: 150px; cursor: pointer; }
     .product-category { display: none; margin-bottom: 2rem; }
     .product-category.active { display: block; }
     .category-buttons { margin-bottom: 1rem; }
@@ -25,6 +25,38 @@
     .category-buttons button:hover { background-color: #ffb3b3; }
     footer { background: #ffe3e3; }
     .icon { width: 24px; vertical-align: middle; margin-right: 8px; }
+
+    /* Modal Styles */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 999; 
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+    }
+    .modal-content {
+      margin: 5% auto;
+      display: block;
+      max-width: 90%;
+    }
+    .caption {
+      color: white;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -78,28 +110,61 @@
       <div class="products" id="others-container"></div>
     </div>
 
+    <div id="imageModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img class="modal-content" id="modalImage">
+      <div class="caption" id="modalCaption"></div>
+    </div>
+
     <script>
-      const insertImages = (count, prefix, containerId) => {
-        const container = document.getElementById(containerId);
-        for (let i = 1; i <= count; i++) {
-          const img = document.createElement("img");
-          img.src = `${prefix}${i}.JPG`;
-          img.alt = `${containerId} ${i}`;
-          img.className = "product-item";
-          container.appendChild(img);
-        }
-      };
+  const captions = {
+    stickers: [
+      "Waterproof, 6.5 x 6.5cm vinyl sticker", "Bunny with Carrot", "Joyful Duo", "w" 
+    ],
+    keyrings: [
+      "Froggy Keyring", "Bunny Keyring", "Froggy in Rain", "Heart Keyring", "Sparkling Duo"
+      "Reading Keyring"
+    ],
+    others: [
+      "Tote Bag - Froggy Face", "Magnet - Bunny", "Notebook - Joyful Thoughts", "Sticker Sheet"
+    ]
+  };
 
-      insertImages(20, "sticker", "stickers-container");
-      insertImages(6, "keyring", "keyrings-container");
-      insertImages(4, "other", "others-container");
+  const insertImages = (count, prefix, containerId) => {
+    const container = document.getElementById(containerId);
+    for (let i = 1; i <= count; i++) {
+      const img = document.createElement("img");
+      img.src = `${prefix}${i}.JPG`;
+      img.alt = captions[containerId][i - 1] || `${containerId} ${i}`;
+      img.className = "product-item";
+      img.onclick = () => showModal(img.src, img.alt);
+      container.appendChild(img);
+    }
+  };
 
-      function showCategory(categoryId) {
-        const categories = document.querySelectorAll('.product-category');
-        categories.forEach(cat => cat.classList.remove('active'));
-        document.getElementById(categoryId).classList.add('active');
-      }
-    </script>
+  insertImages(4, "sticker", "stickers-container");
+  insertImages(6, "keyring", "keyrings-container");
+  insertImages(4, "other", "others-container");
+
+  function showCategory(categoryId) {
+    const categories = document.querySelectorAll('.product-category');
+    categories.forEach(cat => cat.classList.remove('active'));
+    document.getElementById(categoryId).classList.add('active');
+  }
+
+  function showModal(src, caption) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const modalCaption = document.getElementById("modalCaption");
+    modal.style.display = "block";
+    modalImg.src = src;
+    modalCaption.textContent = caption;
+  }
+
+  function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+  }
+</script>
   </section>
 
   <section id="contact">
