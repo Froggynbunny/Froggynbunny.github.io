@@ -31,7 +31,7 @@
 </head>
 <body>
   <header>
-    <img src="images/header-bg.jpg" alt="Froggy and Bunny Logo" class="logo" />
+    <img src="header-bg.jpg" alt="Froggy and Bunny Logo" class="logo" />
     <h1>Froggy and Bunny</h1>
     <p>Enjoy the little moments of happiness</p>
     <nav>
@@ -50,8 +50,8 @@
   <section id="gallery">
     <h2>Comic Gallery</h2>
     <div class="gallery">
-      <img src="images/comic1.jpg" alt="Comic 1" />
-      <img src="images/comic2.jpg" alt="Comic 2" />
+      <img src="comic1.jpg" alt="Comic 1" />
+      <img src="comic2.jpg" alt="Comic 2" />
     </div>
   </section>
 
@@ -77,8 +77,8 @@
 
   <section id="contact">
     <h2>Contact</h2>
-    <p><img src="images/instagram-icon.png" alt="Instagram Icon" class="icon"/><a href="https://www.instagram.com/froggy_n_bunny" target="_blank">@froggy_n_bunny</a></p>
-    <p><img src="images/email-icon.png" alt="Email Icon" class="icon"/><a href="mailto:108nali@gmail.com">108nali@gmail.com</a></p>
+    <p><img src="instagram-icon.png" alt="Instagram Icon" class="icon"/><a href="https://www.instagram.com/froggy_n_bunny" target="_blank">@froggy_n_bunny</a></p>
+    <p><img src="email-icon.png" alt="Email Icon" class="icon"/><a href="mailto:108nali@gmail.com">108nali@gmail.com</a></p>
   </section>
 
   <footer><p>&copy; 2025 Froggy and Bunny. All rights reserved.</p></footer>
@@ -94,7 +94,7 @@
       const container = document.getElementById(containerId);
       for (let i = 1; i <= count; i++) {
         const img = document.createElement("img");
-        img.src = `images/${prefix}${i}.JPG`;
+        img.src = `${prefix}${i}.JPG`;
         img.alt = captions[containerId][i - 1] || `${prefix} ${i}`;
         img.className = "product-item";
         img.onclick = () => showModal(img.src, img.alt);
