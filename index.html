@@ -80,8 +80,8 @@
   <section id="gallery">
     <h2>Comic Gallery</h2>
     <div class="gallery">
-      <img src="comic1.jpg" alt="Comic 1">
-      <img src="comic2.jpg" alt="Comic 2">
+      <img src="images/comic1.jpg" alt="Comic 1">
+      <img src="images/comic2.jpg" alt="Comic 2">
     </div>
   </section>
 
@@ -117,64 +117,70 @@
     </div>
 
     <script>
-  'const captions = {
-    stickers: [
-      "Cute Froggy Sticker", "Bunny with Carrot", "Joyful Duo", "Tea Time Froggy"
-    ],
-    keyrings: [
-      "Froggy Keyring", "Bunny Keyring", "Froggy in Rain", "Heart Keyring", "Sparkling Duo",
-      "Reading Keyring"
-    ],
-    others: [
-      "Tote Bag - Froggy Face", "Magnet - Bunny", "Notebook - Joyful Thoughts", "Sticker Sheet"
-    ]
-  };'
+      const captions = {
+        "stickers-container": [
+          "Cute Froggy Sticker", "Bunny with Carrot", "Joyful Duo", "Tea Time Froggy", "Smiling Bunny",
+          "Hugging Froggy and Bunny", "Dancing Duo", "Sleepy Froggy", "Bunny in Raincoat", "Reading Together",
+          "Nap Time", "Starry Froggy", "Bunny with Balloon", "Best Friends", "Froggy Hug",
+          "Froggy Thinking", "Bunny Drawing", "Laughing Together", "Relaxing on Grass", "Adventure Time"
+        ],
+        "keyrings-container": [
+          "Froggy Keyring", "Bunny Keyring", "Froggy in Rain", "Heart Keyring", "Sparkling Duo",
+          "Reading Keyring", "Napping Keyring", "Picnic Keyring", "Snuggly Bunny", "Exploring Froggy",
+          "Magnet Keyring", "Daisy Duo", "Peaceful Pair", "Bunny Thinking", "Froggy with Fish"
+        ],
+        "others-container": [
+          "Tote Bag - Froggy Face", "Magnet - Bunny", "Notebook - Joyful Thoughts", "Sticker Sheet",
+          "Postcard Set", "Planner Pad", "Mirror Compact", "Phone Grip", "Badge Set",
+          "Zipper Pouch", "Washi Tape", "Bookmark", "Mini Calendar", "Gift Tag Set"
+        ]
+      };
 
-  const insertImages = (count, prefix, containerId) => {
-    const container = document.getElementById(containerId);
-    for (let i = 1; i <= count; i++) {
-      const img = document.createElement("img");
-      img.src = `${prefix}${i}.jpg`;
-      img.alt = captions[containerId][i - 1] || `${containerId} ${i}`;
-      img.className = "product-item";
-      img.onclick = () => showModal(img.src, img.alt);
-      container.appendChild(img);
-    }
-  };
+      const insertImages = (count, prefix, containerId) => {
+        const container = document.getElementById(containerId);
+        for (let i = 1; i <= count; i++) {
+          const img = document.createElement("img");
+          img.src = `images/${prefix}${i}.JPG`;
+          img.alt = captions[containerId] ? captions[containerId][i - 1] || `${containerId} ${i}` : `${containerId} ${i}`;
+          img.className = "product-item";
+          img.onclick = () => showModal(img.src, img.alt);
+          container.appendChild(img);
+        }
+      };
 
-  insertImages(4, "sticker", "stickers-container");
-  insertImages(6, "keyring", "keyrings-container");
-  insertImages(4, "other", "others-container");
+      insertImages(4, "sticker", "stickers-container");
+      insertImages(6, "keyring", "keyrings-container");
+      insertImages(4, "other", "others-container");
 
-  function showCategory(categoryId) {
-    const categories = document.querySelectorAll('.product-category');
-    categories.forEach(cat => cat.classList.remove('active'));
-    document.getElementById(categoryId).classList.add('active');
-  }
+      function showCategory(categoryId) {
+        const categories = document.querySelectorAll('.product-category');
+        categories.forEach(cat => cat.classList.remove('active'));
+        document.getElementById(categoryId).classList.add('active');
+      }
 
-  function showModal(src, caption) {
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImage");
-    const modalCaption = document.getElementById("modalCaption");
-    modal.style.display = "block";
-    modalImg.src = src;
-    modalCaption.textContent = caption;
-  }
+      function showModal(src, caption) {
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const modalCaption = document.getElementById("modalCaption");
+        modal.style.display = "block";
+        modalImg.src = src;
+        modalCaption.textContent = caption;
+      }
 
-  function closeModal() {
-    document.getElementById("imageModal").style.display = "none";
-  }
-</script>
+      function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+      }
+    </script>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
     <p>
-      <img src="instagram-icon.png" alt="Instagram Icon" class="icon">
+      <img src="images/instagram-icon.png" alt="Instagram Icon" class="icon">
       <a href="https://www.instagram.com/froggy_n_bunny" target="_blank">@froggy_n_bunny</a>
     </p>
     <p>
-      <img src="email-icon.png" alt="Email Icon" class="icon">
+      <img src="images/email-icon.png" alt="Email Icon" class="icon">
       <a href="mailto:108nali@gmail.com">108nali@gmail.com</a>
     </p>
   </section>
