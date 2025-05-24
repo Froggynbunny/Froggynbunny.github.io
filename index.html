@@ -1,67 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Froggy and Bunny</title>
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet"/>
   <style>
     body { font-family: 'Patrick Hand', cursive; background-color: #fff9f4; color: #4b4b4b; margin: 0; padding: 0; }
     header, section, footer { padding: 2rem; text-align: center; }
-    header {
-      background-color: #ffe3e3;
-      color: #4b4b4b;
-    }
+    header { background-color: #ffe3e3; }
     h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
     .logo { max-width: 250px; border-radius: 20px; }
     nav a { margin: 0 10px; text-decoration: none; color: #4b4b4b; cursor: pointer; }
-    .gallery img { width: 150px; margin: 10px; border-radius: 10px; }
+    .gallery img, .product-item { width: 150px; margin: 10px; border-radius: 10px; }
     .products, .gallery { display: flex; flex-wrap: wrap; justify-content: center; }
-    .product-item { background: #fff; border: 1px solid #ccc; border-radius: 10px; margin: 10px; padding: 10px; width: 150px; cursor: pointer; }
+    .product-item { background: #fff; border: 1px solid #ccc; padding: 10px; cursor: pointer; }
     .product-category { display: none; margin-bottom: 2rem; }
     .product-category.active { display: block; }
-    .category-buttons { margin-bottom: 1rem; }
-    .category-buttons button { font-family: 'Patrick Hand', cursive; margin: 5px; padding: 0.5rem 1rem; border-radius: 10px; border: none; background-color: #ffc6c6; cursor: pointer; }
+    .category-buttons button { margin: 5px; padding: 0.5rem 1rem; border-radius: 10px; background-color: #ffc6c6; cursor: pointer; }
     .category-buttons button:hover { background-color: #ffb3b3; }
     footer { background: #ffe3e3; }
     .icon { width: 24px; vertical-align: middle; margin-right: 8px; }
 
-    /* Modal Styles */
-    .modal {
-      display: none; 
-      position: fixed; 
-      z-index: 999; 
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.8);
-    }
-    .modal-content {
-      margin: 5% auto;
-      display: block;
-      max-width: 90%;
-    }
-    .caption {
-      color: white;
-      text-align: center;
-      margin-top: 10px;
-    }
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: white;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+    /* Modal */
+    .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); }
+    .modal-content { margin: 5% auto; display: block; max-width: 90%; }
+    .caption { color: white; text-align: center; margin-top: 10px; }
+    .close { position: absolute; top: 20px; right: 35px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
   </style>
 </head>
 <body>
   <header>
-    <img src="header-bg.jpg" alt="Froggy and Bunny Logo" class="logo">
+    <img src="images/header-bg.jpg" alt="Froggy and Bunny Logo" class="logo" />
     <h1>Froggy and Bunny</h1>
     <p>Enjoy the little moments of happiness</p>
     <nav>
@@ -74,113 +44,82 @@
 
   <section id="about">
     <h2>About</h2>
-    <p>Froggy and Bunny in Perth, WA. Riding ups and downs along the journey of life while embracing the little moments of joyfulness. Froggy hopes to bring a bit of positivity to your daily life.</p>
+    <p>Froggy and Bunny in Perth, WA. Riding ups and downs along the journey of life while embracing the little moments of joyfulness.</p>
   </section>
 
   <section id="gallery">
     <h2>Comic Gallery</h2>
     <div class="gallery">
-      <img src="images/comic1.jpg" alt="Comic 1">
-      <img src="images/comic2.jpg" alt="Comic 2">
+      <img src="images/comic1.jpg" alt="Comic 1" />
+      <img src="images/comic2.jpg" alt="Comic 2" />
     </div>
   </section>
 
   <section id="shop">
     <h2>Shop</h2>
     <p>Available via <a href="https://froggynbunny.etsy.com" target="_blank">Etsy</a> or DM on Instagram!</p>
-
     <div class="category-buttons">
       <button onclick="showCategory('stickers')">Stickers</button>
       <button onclick="showCategory('keyrings')">Keyrings</button>
       <button onclick="showCategory('others')">Others</button>
     </div>
 
-    <div class="product-category" id="stickers">
-      <h3>Stickers</h3>
-      <div class="products" id="stickers-container"></div>
-    </div>
-
-    <div class="product-category" id="keyrings">
-      <h3>Keyrings</h3>
-      <div class="products" id="keyrings-container"></div>
-    </div>
-
-    <div class="product-category" id="others">
-      <h3>Others</h3>
-      <div class="products" id="others-container"></div>
-    </div>
+    <div class="product-category" id="stickers"><h3>Stickers</h3><div class="products" id="stickers-container"></div></div>
+    <div class="product-category" id="keyrings"><h3>Keyrings</h3><div class="products" id="keyrings-container"></div></div>
+    <div class="product-category" id="others"><h3>Others</h3><div class="products" id="others-container"></div></div>
 
     <div id="imageModal" class="modal">
       <span class="close" onclick="closeModal()">&times;</span>
-      <img class="modal-content" id="modalImage">
+      <img class="modal-content" id="modalImage" />
       <div class="caption" id="modalCaption"></div>
     </div>
-
-    <script>
-      const captions = {
-        "stickers-container": [
-          "waterproof vinyl sticker, 6.5 x 6.5 cm", "Bunny with Carrot", "Joyful Duo", "Tea Time Froggy"
-        ],
-        "keyrings-container": [
-          "Froggy Keyring", "Bunny Keyring", "Froggy in Rain", "Heart Keyring", "Sparkling Duo",
-          "Reading Keyring"
-        ],
-        "others-container": [
-          "My-plan mini magnet whiteboard", "Fridge magnet - cupit froggy", "Bottle holder", "Tote bag"
-        ]
-      };
-
-      const insertImages = (count, prefix, containerId) => {
-        const container = document.getElementById(containerId);
-        for (let i = 1; i <= count; i++) {
-          const img = document.createElement("img");
-          img.src = `images/${prefix}${i}.JPG`;
-          img.alt = captions[containerId] ? captions[containerId][i - 1] || `${containerId} ${i}` : `${containerId} ${i}`;
-          img.className = "product-item";
-          img.onclick = () => showModal(img.src, img.alt);
-          container.appendChild(img);
-        }
-      };
-
-      insertImages(4, "sticker", "stickers-container");
-      insertImages(6, "keyring", "keyrings-container");
-      insertImages(4, "other", "others-container");
-
-      function showCategory(categoryId) {
-        const categories = document.querySelectorAll('.product-category');
-        categories.forEach(cat => cat.classList.remove('active'));
-        document.getElementById(categoryId).classList.add('active');
-      }
-
-      function showModal(src, caption) {
-        const modal = document.getElementById("imageModal");
-        const modalImg = document.getElementById("modalImage");
-        const modalCaption = document.getElementById("modalCaption");
-        modal.style.display = "block";
-        modalImg.src = src;
-        modalCaption.textContent = caption;
-      }
-
-      function closeModal() {
-        document.getElementById("imageModal").style.display = "none";
-      }
-    </script>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>
-      <img src="images/instagram-icon.png" alt="Instagram Icon" class="icon">
-      <a href="https://www.instagram.com/froggy_n_bunny" target="_blank">@froggy_n_bunny</a>
-    </p>
-    <p>
-      <img src="images/email-icon.png" alt="Email Icon" class="icon">
-      <a href="mailto:108nali@gmail.com">108nali@gmail.com</a>
-    </p>
+    <p><img src="images/instagram-icon.png" alt="Instagram Icon" class="icon"/><a href="https://www.instagram.com/froggy_n_bunny" target="_blank">@froggy_n_bunny</a></p>
+    <p><img src="images/email-icon.png" alt="Email Icon" class="icon"/><a href="mailto:108nali@gmail.com">108nali@gmail.com</a></p>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Froggy and Bunny. All rights reserved.</p>
-  </footer>
+  <footer><p>&copy; 2025 Froggy and Bunny. All rights reserved.</p></footer>
+
+  <script>
+    const captions = {
+      "stickers-container": ["Cute Froggy", "Carrot Bunny", "Joyful Duo", "Tea Time", ...],
+      "keyrings-container": ["Froggy Keyring", "Bunny Keyring", ...],
+      "others-container": ["Tote Bag", "Magnet", ...]
+    };
+
+    const insertImages = (count, prefix, containerId) => {
+      const container = document.getElementById(containerId);
+      for (let i = 1; i <= count; i++) {
+        const img = document.createElement("img");
+        img.src = `images/${prefix}${i}.JPG`;
+        img.alt = captions[containerId][i - 1] || `${prefix} ${i}`;
+        img.className = "product-item";
+        img.onclick = () => showModal(img.src, img.alt);
+        container.appendChild(img);
+      }
+    };
+
+    insertImages(20, "sticker", "stickers-container");
+    insertImages(15, "keyring", "keyrings-container");
+    insertImages(14, "other", "others-container");
+
+    function showCategory(id) {
+      document.querySelectorAll('.product-category').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function showModal(src, caption) {
+      document.getElementById("imageModal").style.display = "block";
+      document.getElementById("modalImage").src = src;
+      document.getElementById("modalCaption").textContent = caption;
+    }
+
+    function closeModal() {
+      document.getElementById("imageModal").style.display = "none";
+    }
+  </script>
 </body>
 </html>
